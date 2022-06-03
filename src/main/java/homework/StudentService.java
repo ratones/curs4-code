@@ -20,7 +20,7 @@ public class StudentService {
         return students.stream()
                 .collect(teeing (
                 mapping(Student::name,toList()),
-                averagingInt(t->t.grade()),
+                averagingInt(Student::grade),
                 (names,avg) -> "%s have an average grade of %s".formatted(String.join(",", names),avg)
         ));
     }
@@ -40,7 +40,7 @@ public class StudentService {
 
     public String allocateCoursesToStudents(){
        return  students.stream()
-               .map(this::alocateCoursToStudent)
+               .map(this::allocateCourseToStudent)
                .map(this::buildStudentInfo)
                .collect(joining("\n"));
     }
@@ -75,7 +75,7 @@ public class StudentService {
                 """.formatted(studentCoursMap.student().name(), buildCourseAsString(studentCoursMap.course()));
     }
 
-    private StudentCourse alocateCoursToStudent(Student student) {
+    private StudentCourse allocateCourseToStudent(Student student) {
         var course = coursService.getRandomCours();
         return new StudentCourse(student, course);
     }
