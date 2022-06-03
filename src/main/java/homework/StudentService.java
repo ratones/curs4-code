@@ -76,7 +76,7 @@ public class StudentService {
     }
 
     private StudentCourse allocateCourseToStudent(Student student) {
-        var course = coursService.getRandomCours();
+        var course = coursService.getRandomCourse();
         return new StudentCourse(student, course);
     }
 

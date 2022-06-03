@@ -16,7 +16,8 @@ public class CourseService {
         return new ArrayList<>(courses);
     }
 
-    public Course getRandomCours(){
-        return courses.get(new Random().nextInt(0, courses.size()));
+    public Course getRandomCourse(){
+        var course = courses.get(new Random().nextInt(0, courses.size()));
+        return new Course(course.name(), course.semester());
     }
 }

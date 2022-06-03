@@ -23,7 +23,9 @@ public class LogicalSwitch {
     public String processPerson(Person p){
         return map.entrySet()
                 .stream()
-                .map(m -> m.getKey().predicate().test(p)?m.getValue().apply(p):"\"%s\" not applicable for %s".formatted(m.getKey().name(),p.name()))
+                .map(m -> m.getKey().predicate().test(p)?
+                        m.getValue().apply(p):
+                        "\"%s\" not applicable for %s".formatted(m.getKey().name(), p.name()))
                 .collect(Collectors.joining("\n"));
     }
 
