@@ -1,17 +1,16 @@
 package homework;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
 public class StudentService {
     private final List<Student> students;
-    private final CoursService coursService;
+    private final CourseService coursService;
 
     public StudentService(List<Student> students) {
-        this.coursService = new CoursService();
+        this.coursService = new CourseService();
         this.students = Optional.ofNullable(students)
                 .map(ArrayList::new)
                 .orElseGet(ArrayList::new);
@@ -20,7 +19,7 @@ public class StudentService {
     public String aggregateStudents(){
         return students.stream()
                 .collect(teeing (
-                mapping(t -> t.name(),toList()),
+                mapping(Student::name,toList()),
                 averagingInt(t->t.grade()),
                 (names,avg) -> "%s have an average grade of %s".formatted(String.join(",", names),avg)
         ));
@@ -56,10 +55,10 @@ public class StudentService {
             };
             grades.add("%s was graded with %s".formatted(students.get(i).name(),grade));
         }
-        return grades.stream().collect(joining("\n"));
+        return String.join("\n", grades);
     }
 
-    private String buildCourseAsString(Cours cours) {
+    private String buildCourseAsString(Course cours) {
         return """
                 {
                     "course":"%s",
@@ -71,15 +70,15 @@ public class StudentService {
 
     private String buildStudentInfo(StudentCourse studentCoursMap) {
         return """
-                %s will participate to course 
+                %s will participate to course
                 %s
-                """.formatted(studentCoursMap.student().name(), buildCourseAsString(studentCoursMap.cours()));
+                """.formatted(studentCoursMap.student().name(), buildCourseAsString(studentCoursMap.course()));
     }
 
     private StudentCourse alocateCoursToStudent(Student student) {
-        var cours = coursService.getRandomCours();
-        var map = new StudentCourse(student, cours);
-        return map;
+        var course = coursService.getRandomCours();
+        return new StudentCourse(student, course);
     }
+
 
 }

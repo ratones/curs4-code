@@ -1,4 +1,4 @@
 package homework;
 
-public record StudentCourse(Student student, Cours cours) {
+public record StudentCourse(Student student, Course course) {
 }
