@@ -10,10 +10,10 @@ public class LogicalSwitch {
 //
     public LogicalSwitch() {
         this.map = new HashMap<>();
-        NamedPredicate<Person> p1 = new NamedPredicate<>(p ->p.name().startsWith("M"),"StartsWith M Filter");
-        NamedPredicate<Person> p2 = new NamedPredicate<>(p ->p.age() < 10,"Young Filter");
-        NamedPredicate<Person> p3 = new NamedPredicate<>(p ->p.age() > 60,"Old Filter");
-        NamedPredicate<Person> p4 = new NamedPredicate<>(p ->p.address().length() > 10,"Address Filter");
+        NamedPredicate<Person> p1 = new NamedPredicate<>(p ->p.name().startsWith("M"),"StartsWith M processor");
+        NamedPredicate<Person> p2 = new NamedPredicate<>(p ->p.age() < 10,"Young processor");
+        NamedPredicate<Person> p3 = new NamedPredicate<>(p ->p.age() > 60,"Old processor");
+        NamedPredicate<Person> p4 = new NamedPredicate<>(p ->p.address().length() > 10,"Address processor");
         this.map.put(p1, (p) -> "%s starts with M".formatted(p.name()));
         this.map.put(p2, (p) -> "%s is young".formatted(p.name()));
         this.map.put(p3, (p) -> "%s is old".formatted(p.name()));
