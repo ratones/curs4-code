@@ -1,7 +1,6 @@
 package homework.logicalSwitch;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -14,6 +13,6 @@ public class LogicalSwitchMain {
                 new Person("Ana", 8, "Sibiu")
         );
         var lsw = new LogicalSwitch();
-        System.out.println(persons.stream().map(lsw::compute).collect(joining("\n\nModifying person.... \n")));
+        System.out.println(persons.stream().map(lsw::processPerson).collect(joining("\n\nProcessing person.... \n")));
     }
 }

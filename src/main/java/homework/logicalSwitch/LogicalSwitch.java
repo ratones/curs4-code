@@ -20,7 +20,7 @@ public class LogicalSwitch {
         this.map.put(p4, (p) -> "%s's address too long, replaced with %s...".formatted(p.name(),p.address().substring(0,10)));
     }
 
-    public String compute(Person p){
+    public String processPerson(Person p){
         return map.entrySet()
                 .stream()
                 .map(m -> m.getKey().predicate().test(p)?m.getValue().apply(p):"%s not applied for %s".formatted(m.getKey().name(),p.name()))
